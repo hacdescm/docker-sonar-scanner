@@ -17,6 +17,14 @@ ENV NODE_PATH=/usr/lib/node_modules
 ENV TZ=Asia/Hong_Kong
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
+# Add Root Certs
+RUN cd /usr/local/share/ca-certificates; \
+    wget -q https://github.com/hacdescm/certs/archive/master.zip; \
+    unzip -j master.zip; \
+    rm master.zip
+
+RUN update-ca-certificates
+
 WORKDIR /usr/src
 
 RUN curl --insecure -o ./sonarscanner.zip -L https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.0.0.1744-linux.zip && \
