@@ -31,6 +31,7 @@ RUN curl --insecure -o ./sonarscanner.zip -L https://binaries.sonarsource.com/Di
 	unzip sonarscanner.zip && \
 	rm sonarscanner.zip && \
 	mv sonar-scanner-4.0.0.1744-linux /usr/lib/sonar-scanner && \
+	cp /etc/ssl/certs/java/cacert /usr/lib/sonar-scanner/jre/lib/security/cacerts && \
 	ln -s /usr/lib/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner
 
 ENV SONAR_RUNNER_HOME=/usr/lib/sonar-scanner
